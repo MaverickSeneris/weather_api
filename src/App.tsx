@@ -2,13 +2,15 @@ import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import axios from "axios";
 import "./App.css";
 import GeoLocationForm from "./components/locationForm";
+import WeatherInfo from "./components/weatherInfo";
+import { WeatherData } from "../types";
 
 export interface Location {
   name: string;
   lat: number;
   lon: number;
   country: string;
-  state?: string | undefined;
+  state?: string;
 }
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [state, setState] = useState<string>("");
-  const [weatherData, setWeatherData] = useState(null);
+  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ function App() {
       .get<Location[]>(apiUrl)
       .then((response) => {
         setLocations(response.data);
-        setError(null); // Clear any previous errors
+        setError(null);
       })
       .catch((error) => {
         console.error("Error fetching data from the API:", error);
@@ -64,9 +66,8 @@ function App() {
       });
   };
 
-
   return (
-    <div className="h-screen flex items-center justify-center bg-blue-500 ">
+    <div className=" flex flex-col h-screen flex items-center justify-center bg-blue-500 ">
       <GeoLocationForm
         handleSubmit={handleSubmit}
         locations={locations}
@@ -76,6 +77,7 @@ function App() {
         setError={setError}
         handleGeoLocation={handleGeoLocation}
       />
+      <WeatherInfo name={name} state={state} weatherData={weatherData}/>
     </div>
   );
 }
