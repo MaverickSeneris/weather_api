@@ -1,65 +1,32 @@
-import React, { useState, FormEvent, ChangeEvent } from "react";
-import axios from "axios";
+import React, { FormEvent, ChangeEvent } from "react";
 import { FaSearchLocation } from "react-icons/fa";
 import Card from "./card";
+import { Location } from "../App";
 
-interface Location {
-  name: string;
-  lat: number;
-  lon: number;
-  country: string;
-  state?: string;
+interface GeoLocationFormProps {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  handleCityChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleGeoLocation: (
+    lat: number,
+    lon: number,
+    name: string,
+    state?: string
+  ) => void;
+  locations: Location[];
+  city: string;
+  error: string | null;
+  setError: (error: string | null) => void;
 }
 
-const GeoLocationForm: React.FC = () => {
-  const [city, setCity] = useState<string>("");
-  const [locations, setLocations] = useState<Location[]>([]);
-  const [weatherData, setWeatherData] = useState(null)
-  const [error, setError] = useState<string | null>(null);
-
-  console.log(locations);
-
-  console.log(weatherData)
-
-  const handleGeoLocation = (lat: number, lon: number) => {
-    console.log(lat, lon);
-    const apiKey = "fd994ec80d186de6dc97b9fd5ef8aac2";
-    const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=${apiKey}`
-  
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setWeatherData(response.data);
-        setError(null); // Clear any previous errors
-      })
-      .catch((error) => {
-        console.error("Error fetching data from the API:", error);
-        setError("Error fetching data from the API");
-      });
-
-};
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const apiKey = "fd994ec80d186de6dc97b9fd5ef8aac2";
-    const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
-
-    axios
-      .get<Location[]>(apiUrl)
-      .then((response) => {
-        setLocations(response.data);
-        setError(null); // Clear any previous errors
-      })
-      .catch((error) => {
-        console.error("Error fetching data from the API:", error);
-        setError("Error fetching data from the API");
-      });
-  };
-
-  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCity(e.target.value);
-  };
-
+const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
+  handleSubmit,
+  handleCityChange,
+  handleGeoLocation,
+  locations,
+  city,
+  error,
+  setError,
+}) => {
   return (
     <div className="flex flex-col gap-5">
       <Card>
@@ -100,7 +67,12 @@ const GeoLocationForm: React.FC = () => {
                   key={index}
                   className="flex gap-1 items-start justify-start  cursor-pointer hover:text-blue-600 text-3xl active:text-blue-700 ..."
                   onClick={() =>
-                    handleGeoLocation(location.lat, location.lon)
+                    handleGeoLocation(
+                      location.lat,
+                      location.lon,
+                      location.name,
+                      location.state
+                    )
                   }
                 >
                   <h2 className="text-2xl font-semibold">{location.name},</h2>
@@ -112,6 +84,11 @@ const GeoLocationForm: React.FC = () => {
           </div>
         </Card>
       )}
+      {/* <Card>
+        <p>{name}</p>
+        <p>{state}</p>
+        {weatherData && <p>{Math.ceil(weatherData.current.temp)} C</p>}
+      </Card> */}
     </div>
   );
 };
