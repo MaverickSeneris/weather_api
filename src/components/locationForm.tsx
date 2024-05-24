@@ -24,8 +24,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   handleGeoLocation,
   locations,
   city,
-  error,
-  setError,
+  error
 }) => {
   return (
     <div className="flex flex-col gap-5">
@@ -84,11 +83,6 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
           </div>
         </Card>
       )}
-      {/* <Card>
-        <p>{name}</p>
-        <p>{state}</p>
-        {weatherData && <p>{Math.ceil(weatherData.current.temp)} C</p>}
-      </Card> */}
     </div>
   );
 };

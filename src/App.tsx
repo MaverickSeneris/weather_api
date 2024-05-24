@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import axios from "axios";
 import "./App.css";
 import GeoLocationForm from "./components/locationForm";
@@ -68,6 +68,12 @@ function App() {
 
   return (
     <div className=" flex flex-col h-screen flex items-center justify-center bg-blue-500 ">
+      {weatherData ? <WeatherInfo
+        name={name}
+        state={state}
+        weatherData={weatherData}
+        setWeatherData={setWeatherData}
+      /> :
       <GeoLocationForm
         handleSubmit={handleSubmit}
         locations={locations}
@@ -76,8 +82,8 @@ function App() {
         error={error}
         setError={setError}
         handleGeoLocation={handleGeoLocation}
-      />
-      <WeatherInfo name={name} state={state} weatherData={weatherData}/>
+      />}
+      :
     </div>
   );
 }
