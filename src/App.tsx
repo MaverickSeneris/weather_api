@@ -72,7 +72,11 @@ function App() {
         name={name}
         state={state}
         weatherData={weatherData}
+        setName={setName}
+        setState={setState}
         setWeatherData={setWeatherData}
+        setCity={setCity}
+        setLocations={setLocations}
       /> :
       <GeoLocationForm
         handleSubmit={handleSubmit}
