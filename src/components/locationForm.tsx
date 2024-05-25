@@ -6,7 +6,7 @@ import { Location } from "../App";
 interface GeoLocationFormProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   handleCityChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleGeoLocation: (
+  handleGeoLocation: ( 
     lat: number,
     lon: number,
     name: string,

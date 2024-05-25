@@ -19,7 +19,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [state, setState] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<WeatherData[]>();
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ function App() {
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
     axios
-      .get(apiUrl)
+      .get<WeatherData>(apiUrl)
       .then((response) => {
         setWeatherData(response.data);
         setError(null);
@@ -67,27 +67,29 @@ function App() {
   };
 
   return (
-    <div className=" flex overflow-auto ... flex-col flex items-center justify-center bg-blue-500">
-      {weatherData ? <WeatherInfo
-        name={name}
-        state={state}
-        weatherData={weatherData}
-        setName={setName}
-        setState={setState}
-        setWeatherData={setWeatherData}
-        setCity={setCity}
-        setLocations={setLocations}
-      /> :
-      <GeoLocationForm
-        handleSubmit={handleSubmit}
-        locations={locations}
-        city={city}
-        handleCityChange={handleCityChange}
-        error={error}
-        setError={setError}
-        handleGeoLocation={handleGeoLocation}
-      />}
-      :
+    <div className="flex overflow-auto flex-col items-center justify-center bg-blue-500">
+      {weatherData ? (
+        <WeatherInfo
+          name={name}
+          state={state}
+          weatherData={weatherData}
+          setName={setName}
+          setState={setState}
+          setWeatherData={setWeatherData}
+          setCity={setCity}
+          setLocations={setLocations}
+        />
+      ) : (
+        <GeoLocationForm
+          handleSubmit={handleSubmit}
+          locations={locations}
+          city={city}
+          handleCityChange={handleCityChange}
+          error={error}
+          setError={setError}
+          handleGeoLocation={handleGeoLocation}
+        />
+      )}
     </div>
   );
 }

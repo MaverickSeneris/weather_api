@@ -1,25 +1,25 @@
-import { WeatherData } from "../../types.tsx";
+import { WeatherData } from "../../types";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { BsFillSunriseFill, BsFillSunsetFill } from "react-icons/bs";
 import { LuWind } from "react-icons/lu";
 import { IoIosWater } from "react-icons/io";
-import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { FaWater, FaEye } from "react-icons/fa";
+import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { PiGaugeFill } from "react-icons/pi";
-import Card from "./card.tsx";
-import { Location } from "../App.tsx";
+import Card from "./card";
+import { Location } from "../App";
 
 interface WeatherInfoProps {
   name: string;
   state: string;
   city: string;
-  locations: [];
-  weatherData: WeatherData[];
+  locations: Location[];
+  weatherData: WeatherData;
   setName: (name: string) => void;
   setState: (state: string) => void;
   setCity: (city: string) => void;
   setWeatherData: (weatherData: WeatherData[] | null) => void;
-  setLocations: (locations: Location[] | []) => void;
+  setLocations: (locations: Location[]) => void;
 }
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
@@ -44,22 +44,15 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   const filteredHourlyData = hourlyData.filter(
     (_, index) => index === 0 || index % 2 !== 0
   );
-  console.log(filteredHourlyData.map((item) => item.temp));
 
   const convertUnixTimestampToHHMM = (
     timestamp: number,
-    hourMin?: true | false
+    hourMin?: boolean
   ): string => {
-    if (hourMin === true) {
-      const date = new Date(timestamp * 1000);
-      const hours = date.getHours().toString().padStart(2, "0");
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    } else {
-      const date = new Date(timestamp * 1000);
-      const hours = date.getHours().toString().padStart(2, "0");
-      return `${hours}`;
-    }
+    const date = new Date(timestamp * 1000);
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    return hourMin ? `${hours}:${minutes}` : `${hours}`;
   };
 
   return (
@@ -85,7 +78,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               L: {Math.ceil(weatherData?.daily[0].temp.min)}&deg;
             </p>
           </div>
-          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto ... w-96 mt-7 mx-10">
+          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto w-96 mt-7 mx-10">
             {filteredHourlyData.map((hourData, index) => {
               return (
                 <div
@@ -93,9 +86,11 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
                   key={index}
                 >
                   <p className="text-2xl">
-                    {index === 0
-                      ? <span className="text-xl font-base">Now</span>
-                      : convertUnixTimestampToHHMM(hourData.dt)}
+                    {index === 0 ? (
+                      <span className="text-xl font-base">Now</span>
+                    ) : (
+                      convertUnixTimestampToHHMM(hourData.dt)
+                    )}
                   </p>
                   <img
                     src={`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@4x.png`}
@@ -113,10 +108,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               <div className="flex flex-col items-center px-20 py-5">
                 <BsFillSunriseFill size={30} />
                 <p className="text-lg mt-2">
-                  {convertUnixTimestampToHHMM(
-                    weatherData.current.sunrise,
-                    true
-                  )}
+                  {convertUnixTimestampToHHMM(weatherData.current.sunrise, true)}
                 </p>
               </div>
             </Card>
@@ -131,8 +123,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                  <LuWind size={25}/>
-                  <p className='text-xl font-semibold'>Wind</p>
+                  <LuWind size={25} />
+                  <p className="text-xl font-semibold">Wind</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{weatherData.current.wind_speed} km/h</p>
               </div>
@@ -140,8 +132,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                <FaTemperatureThreeQuarters size={25} />
-                  <p className='text-xl font-semibold'>Feels Like</p>
+                  <FaTemperatureThreeQuarters size={25} />
+                  <p className="text-xl font-semibold">Feels Like</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.feels_like)}&deg;</p>
               </div>
@@ -149,9 +141,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                <FaWater size={25} />
-
-                  <p className='text-xl font-semibold'>Humidity</p>
+                  <FaWater size={25} />
+                  <p className="text-xl font-semibold">Humidity</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.humidity)} %</p>
               </div>
@@ -159,8 +150,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                <IoIosWater size={25} />
-                  <p className='text-xl font-semibold'>Precipitation</p>
+                  <IoIosWater size={25} />
+                  <p className="text-xl font-semibold">Precipitation</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.minutely[0].precipitation)} %</p>
               </div>
@@ -168,8 +159,8 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                <PiGaugeFill size={25} />
-                  <p className='text-xl font-semibold'>Pressure</p>
+                  <PiGaugeFill size={25} />
+                  <p className="text-xl font-semibold">Pressure</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.pressure)} hPa</p>
               </div>
@@ -177,10 +168,10 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             <Card>
               <div className="flex flex-col self-start p-5 gap-5">
                 <div className="flex items-center gap-1">
-                <FaEye size={25} />
-                  <p className='text-xl font-semibold'>Visibility</p>
+                  <FaEye size={25} />
+                  <p className="text-xl font-semibold">Visibility</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.visibility)} km</p>
+                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.visibility / 1000)} km</p>
               </div>
             </Card>
           </div>
