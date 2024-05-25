@@ -1,5 +1,5 @@
 import React, { FormEvent, ChangeEvent } from "react";
-import { FaSearchLocation } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import Card from "./card";
 import { Location } from "../App";
 
@@ -51,7 +51,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              <FaSearchLocation />
+              <FaSearch size={20}/>
             </button>
           </form>
         </div>

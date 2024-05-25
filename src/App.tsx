@@ -52,7 +52,7 @@ function App() {
     setName(name);
     setState(state);
     const apiKey = "fd994ec80d186de6dc97b9fd5ef8aac2";
-    const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely&units=metric&appid=${apiKey}`;
+    const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
     axios
       .get(apiUrl)
