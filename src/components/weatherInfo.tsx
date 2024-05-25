@@ -58,36 +58,36 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   return (
     <div className="flex flex-col justify-center p-10">
       <Card>
-        <div className="flex flex-col items-center gap-2 w-full p-5">
+        <div className="flex flex-col items-center gap-2 w-full px-1 py-5">
           <h1 className="text-4xl font-bold">
             {name}
             {state && <span className="font-thin">, {state}</span>}
           </h1>
-          <p className="text-6xl font-black">
+          <p className="text-4xl font-black">
             {Math.ceil(weatherData.current?.temp)}&deg;
           </p>
-          <p className="text-2xl">
+          <p className="text-xl">
             {weatherData?.current.weather[0].main} (
             {weatherData?.current.weather[0].description})
           </p>
           <div className="flex gap-5">
-            <p className="text-2xl">
+            <p className="text-xl">
               H: {Math.ceil(weatherData?.daily[0].temp.max)}&deg;
             </p>
-            <p className="text-2xl">
+            <p className="text-xl">
               L: {Math.ceil(weatherData?.daily[0].temp.min)}&deg;
             </p>
           </div>
-          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto w-96 mt-7 mx-10">
+          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto hover:overflow-scroll w-64 mt-3 mx-10 py-2">
             {filteredHourlyData.map((hourData, index) => {
               return (
                 <div
                   className="flex flex-col gap-1 items-center justify-center "
                   key={index}
                 >
-                  <p className="text-2xl">
+                  <p className="text-sm">
                     {index === 0 ? (
-                      <span className="text-xl font-base">Now</span>
+                      <span className="text-xs font-semibold">Now</span>
                     ) : (
                       convertUnixTimestampToHHMM(hourData.dt)
                     )}
@@ -96,91 +96,91 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
                     src={`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@4x.png`}
                     alt="Weather icon"
                   />
-                  <p className="text-2xl font-bold">
+                  <p className="text-sm font-bold">
                     {Math.ceil(hourData.temp)}&deg;
                   </p>
                 </div>
               );
             })}
           </div>
-          <div className="grid grid-cols-2 mt-4 gap-1.5">
+          <div className="grid grid-cols-2 mt-4 gap-y-3 gap-x-2.5">
             <Card>
-              <div className="flex flex-col items-center px-20 py-5">
-                <BsFillSunriseFill size={30} />
-                <p className="text-lg mt-2">
+              <div className="flex flex-col items-center justify-center px-10 py-2">
+                <BsFillSunriseFill size={25} />
+                <p className="text-sm mt-2">
                   {convertUnixTimestampToHHMM(weatherData.current.sunrise, true)}
                 </p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col items-center px-20 py-5">
-                <BsFillSunsetFill size={30} />
-                <p className="text-xl mt-2">
+              <div className="flex flex-col items-center justify-center px-10 py-2">
+                <BsFillSunsetFill size={25} />
+                <p className="text-sm mt-2">
                   {convertUnixTimestampToHHMM(weatherData.current.sunset, true)}
                 </p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <LuWind size={25} />
-                  <p className="text-xl font-semibold">Wind</p>
+                  <LuWind size={13} />
+                  <p className="text-xs font-semibold">Wind</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{weatherData.current.wind_speed} km/h</p>
+                <p className="text-xl font-thin mt-2">{weatherData.current.wind_speed} km/h</p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <FaTemperatureThreeQuarters size={25} />
-                  <p className="text-xl font-semibold">Feels Like</p>
+                  <FaTemperatureThreeQuarters size={13} />
+                  <p className="text-xs font-semibold">Feels Like</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.feels_like)}&deg;</p>
+                <p className="text-xl font-thin mt-2">{Math.ceil(weatherData.current.feels_like)}&deg;</p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <FaWater size={25} />
-                  <p className="text-xl font-semibold">Humidity</p>
+                  <FaWater size={13} />
+                  <p className="text-xs font-semibold">Humidity</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.humidity)} %</p>
+                <p className="text-xl font-thin mt-2">{Math.ceil(weatherData.current.humidity)} %</p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <IoIosWater size={25} />
-                  <p className="text-xl font-semibold">Precipitation</p>
+                  <IoIosWater size={13} />
+                  <p className="text-xs font-semibold">Precipitation</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.minutely[0].precipitation)} %</p>
+                <p className="text-xl font-thin mt-2">{Math.ceil(weatherData.minutely[0].precipitation)} %</p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <PiGaugeFill size={25} />
-                  <p className="text-xl font-semibold">Pressure</p>
+                  <PiGaugeFill size={13} />
+                  <p className="text-xs font-semibold">Pressure</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.pressure)} hPa</p>
+                <p className="text-xl font-thin mt-2">{Math.ceil(weatherData.current.pressure)} hPa</p>
               </div>
             </Card>
             <Card>
-              <div className="flex flex-col self-start p-5 gap-5">
+              <div className="flex flex-col self-start px-1.5 py-2 gap-2">
                 <div className="flex items-center gap-1">
-                  <FaEye size={25} />
-                  <p className="text-xl font-semibold">Visibility</p>
+                  <FaEye size={13} />
+                  <p className="text-xs font-semibold">Visibility</p>
                 </div>
-                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.visibility / 1000)} km</p>
+                <p className="text-xl font-thin mt-2">{Math.ceil(weatherData.current.visibility / 1000)} km</p>
               </div>
             </Card>
           </div>
           <button
             onClick={handleResetData}
-            className="flex items-center text-2xl bg-blue-500 text-white py-2 px-4 mt-5 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="flex items-center bg-blue-500 text-white py-2 px-4 mt-5 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
-            <MdOutlineArrowBackIos size={30} />{" "}
-            <span className="font-semibold">Go Back</span>
+            <MdOutlineArrowBackIos size={20} />
+            <span className="font-semibold text-lg">Go Back</span>
           </button>
         </div>
       </Card>

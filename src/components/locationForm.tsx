@@ -34,7 +34,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
             Weather <span className="font-bold">Wise</span>
           </h1>
           <form
-            className="flex items-center w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            className="flex items-center w-full px-3 py-2 border-2 rounded-lg shadow-sm bw-2 hover:border-sky-200 focus:outline-none focus:ring focus:border-blue-300 border-slate-500"
             onSubmit={handleSubmit}
           >
             <div className="flex-grow">
@@ -43,7 +43,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
                 value={city}
                 onChange={handleCityChange}
                 required
-                className="outline-none text-2xl w-full bg-transparent"
+                className="outline-none text-2xl w-full bg-transparent placeholder-slate-500"
                 placeholder="Enter a City..."
               />
             </div>

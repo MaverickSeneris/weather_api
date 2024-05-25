@@ -46,7 +46,7 @@ function App() {
     lat: number,
     lon: number,
     name: string,
-    state: string
+    state: string, 
   ) => {
     console.log(lat, lon);
     setName(name);
@@ -67,7 +67,7 @@ function App() {
   };
 
   return (
-    <div className="flex overflow-auto flex-col items-center justify-center bg-blue-500">
+    <div className="flex h-screen overflow-auto flex-col items-center justify-center bg-blue-500">
       {weatherData ? (
         <WeatherInfo
           name={name}
