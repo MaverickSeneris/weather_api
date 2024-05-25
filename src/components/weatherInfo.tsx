@@ -4,7 +4,8 @@ import { BsFillSunriseFill, BsFillSunsetFill } from "react-icons/bs";
 import { LuWind } from "react-icons/lu";
 import { IoIosWater } from "react-icons/io";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
-import { FaWater } from "react-icons/fa";
+import { FaWater, FaEye } from "react-icons/fa";
+import { PiGaugeFill } from "react-icons/pi";
 import Card from "./card.tsx";
 import { Location } from "../App.tsx";
 
@@ -162,6 +163,24 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
                   <p className='text-xl font-semibold'>Precipitation</p>
                 </div>
                 <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.minutely[0].precipitation)} %</p>
+              </div>
+            </Card>
+            <Card>
+              <div className="flex flex-col self-start p-5 gap-5">
+                <div className="flex items-center gap-1">
+                <PiGaugeFill size={25} />
+                  <p className='text-xl font-semibold'>Pressure</p>
+                </div>
+                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.pressure)} hPa</p>
+              </div>
+            </Card>
+            <Card>
+              <div className="flex flex-col self-start p-5 gap-5">
+                <div className="flex items-center gap-1">
+                <FaEye size={25} />
+                  <p className='text-xl font-semibold'>Visibility</p>
+                </div>
+                <p className="text-3xl font-thin mt-2">{Math.ceil(weatherData.current.visibility)} km</p>
               </div>
             </Card>
           </div>
