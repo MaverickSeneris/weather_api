@@ -19,7 +19,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [state, setState] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+  const [weatherData, setWeatherData] = useState<WeatherData[]>();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -34,28 +34,56 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     setLocations([]);
   };
 
+  const hourlyData = weatherData?.hourly;
+  const filteredHourlyData = hourlyData.filter(
+    (_, index) => index === 0 || index % 2 !== 0
+  );
+  console.log(filteredHourlyData.map((item) => item.temp));
+
+  const convertUnixTimestampToHHMM = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+    const hours = date.getHours().toString().padStart(2, "0"); // Ensure 2 digits
+    // const minutes = date.getMinutes().toString().padStart(2, '0'); // Ensure 2 digits
+    // return `${hours}:${minutes}`;
+    return `${hours}`;
+  };
+
   return (
     <div>
       <Card>
         <div className="flex flex-col items-center gap-2">
           <h1 className="text-4xl font-bold">
             {name}
-            {state && <span>, {state}</span>}
+            {state && <span className="font-thin">, {state}</span>}
           </h1>
-          <p className="text-4xl font-black">
+          <p className="text-6xl font-black">
             {Math.ceil(weatherData.current?.temp)}&deg;
           </p>
           <p className="text-2xl">
-            {weatherData.current?.weather[0].main} (
-            {weatherData.current?.weather[0].description})
+            {weatherData?.current.weather[0].main} (
+            {weatherData?.current.weather[0].description})
           </p>
           <div className="flex gap-2 ">
             <p className="text-2xl">
-              H:{Math.ceil(weatherData.daily[0].temp.max)}&deg;
+              H:{Math.ceil(weatherData?.daily[0].temp.max)}&deg;
             </p>
             <p className="text-2xl">
-              L:{Math.ceil(weatherData.daily[0].temp.min)}&deg;
+              L:{Math.ceil(weatherData?.daily[0].temp.min)}&deg;
             </p>
+          </div>
+          <div className="flex gap-5 w-10 self-start overflow-auto ... w-96 mt-5">
+            {filteredHourlyData.map((hourData, index) => {
+              return (
+                <div className="flex flex-col gap-1 items-center justify-center" key={index}>
+                  <p className="text-2xl">{index === 0 ? "Now" :convertUnixTimestampToHHMM(hourData.dt)}</p>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@4x.png`}
+                    alt="Weather icon"
+                  />
+                  <p className="text-2xl font-bold">{Math.ceil(hourData.temp)}&deg;</p>
+                </div>
+              );
+            })}
           </div>
 
           <button

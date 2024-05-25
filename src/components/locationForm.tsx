@@ -43,7 +43,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
                 value={city}
                 onChange={handleCityChange}
                 required
-                className="outline-none text-2xl w-full"
+                className="outline-none text-2xl w-full bg-transparent"
                 placeholder="Enter a City..."
               />
             </div>
