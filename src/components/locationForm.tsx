@@ -29,7 +29,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   return (
     <div className="flex flex-col gap-5">
       <Card>
-        <div className="flex flex-col items-center justify-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 p-10">
           <h1 className="text-5xl font-thin mb-5">
             Weather <span className="font-bold">Wise</span>
           </h1>
@@ -59,7 +59,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
       </Card>
       {locations.length > 0 && (
         <Card>
-          <div className="flex flex-col items-start gap-3">
+          <div className="flex flex-col items-start gap-3 p-5">
             {locations.map((location, index) => {
               return (
                 <div
