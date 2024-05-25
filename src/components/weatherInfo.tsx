@@ -63,9 +63,9 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center p-10">
       <Card>
-        <div className="flex flex-col items-center gap-2 w-full p-10">
+        <div className="flex flex-col items-center gap-2 w-full p-5">
           <h1 className="text-4xl font-bold">
             {name}
             {state && <span className="font-thin">, {state}</span>}
@@ -85,7 +85,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               L: {Math.ceil(weatherData?.daily[0].temp.min)}&deg;
             </p>
           </div>
-          <div className="flex gap-5 justify-center scrollbar-thin overflow-auto ... w-96 mt-7 mx-10">
+          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto ... w-96 mt-7 mx-10">
             {filteredHourlyData.map((hourData, index) => {
               return (
                 <div
@@ -94,7 +94,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
                 >
                   <p className="text-2xl">
                     {index === 0
-                      ? "Now"
+                      ? <span className="text-xl font-base">Now</span>
                       : convertUnixTimestampToHHMM(hourData.dt)}
                   </p>
                   <img
@@ -108,11 +108,11 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               );
             })}
           </div>
-          <div className="grid grid-cols-2 mt-10 gap-5">
+          <div className="grid grid-cols-2 mt-4 gap-1.5">
             <Card>
               <div className="flex flex-col items-center px-20 py-5">
                 <BsFillSunriseFill size={30} />
-                <p className="text-xl mt-2">
+                <p className="text-lg mt-2">
                   {convertUnixTimestampToHHMM(
                     weatherData.current.sunrise,
                     true

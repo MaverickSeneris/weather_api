@@ -24,10 +24,10 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   handleGeoLocation,
   locations,
   city,
-  error
+  error,
 }) => {
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 h-screen items-center justify-center">
       <Card>
         <div className="flex flex-col items-center justify-center gap-2 p-10">
           <h1 className="text-5xl font-thin mb-5">
@@ -51,7 +51,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              <FaSearch size={20}/>
+              <FaSearch size={20} />
             </button>
           </form>
         </div>
@@ -59,7 +59,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
       </Card>
       {locations.length > 0 && (
         <Card>
-          <div className="flex flex-col items-start gap-3 p-5">
+          <div className="flex flex-col items-start gap-3 w-96 mx-11 my-5">
             {locations.map((location, index) => {
               return (
                 <div

@@ -67,7 +67,7 @@ function App() {
   };
 
   return (
-    <div className=" flex flex-col h-screen flex items-center justify-center bg-blue-500 ">
+    <div className=" flex overflow-auto ... flex-col flex items-center justify-center bg-blue-500">
       {weatherData ? <WeatherInfo
         name={name}
         state={state}
