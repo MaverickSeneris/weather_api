@@ -1,8 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import axios from "axios";
 import "./App.css";
-import GeoLocationForm from "./components/locationForm";
-import WeatherInfo from "./components/weatherInfo";
+import GeoLocationForm from "./components/location_form/locationForm";
+import WeatherInfo from "./components/weather_info/weatherInfo";
 import { WeatherData } from "../types";
 
 export interface Location {

@@ -1,4 +1,4 @@
-import { WeatherData } from "../../types";
+import { WeatherData } from "../../../types";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { BsFillSunriseFill, BsFillSunsetFill } from "react-icons/bs";
 import { LuWind } from "react-icons/lu";
@@ -6,8 +6,8 @@ import { IoIosWater } from "react-icons/io";
 import { FaWater, FaEye } from "react-icons/fa";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { PiGaugeFill } from "react-icons/pi";
-import Card from "./card";
-import { Location } from "../App";
+import Card from "../card";
+import { Location } from "../../App";
 
 interface WeatherInfoProps {
   name: string;
