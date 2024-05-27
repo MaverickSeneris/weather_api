@@ -18,7 +18,7 @@ interface WeatherInfoProps {
   setName: (name: string) => void;
   setState: (state: string) => void;
   setCity: (city: string) => void;
-  setWeatherData: (weatherData: WeatherData[] | null) => void;
+  setWeatherData: (weatherData: WeatherData | null) => void;
   setLocations: (locations: Location[]) => void;
 }
 
@@ -40,11 +40,13 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     setLocations([]);
   };
 
+  // NOTE: Encapsulate this and make it as a function:
   const hourlyData = weatherData?.hourly;
   const filteredHourlyData = hourlyData.filter(
     (_, index) => index === 0 || index % 2 !== 0
   );
 
+  // NOTE: Encapsulate this function:
   const convertUnixTimestampToHHMM = (
     timestamp: number,
     hourMin?: boolean
@@ -59,17 +61,21 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     <div className="flex flex-col justify-center p-10">
       <Card>
         <div className="flex flex-col items-center gap-2 w-full px-1 py-5">
+          {/* TODO: Make this a reusable component: LOCATION */}
           <h1 className="text-4xl font-bold">
             {name}
             {state && <span className="font-thin">, {state}</span>}
           </h1>
+          {/* TODO: Make this a reusable component: CURRENT TEMP */}
           <p className="text-4xl font-black">
             {Math.ceil(weatherData.current?.temp)}&deg;
           </p>
+          {/* TODO: Make this a reusable component: CURRENT CONDITION */}
           <p className="text-xl">
             {weatherData?.current.weather[0].main} (
             {weatherData?.current.weather[0].description})
           </p>
+          {/* TODO: Make this a reusable component: CURRENT TEMP */}
           <div className="flex gap-5">
             <p className="text-xl">
               H: {Math.ceil(weatherData?.daily[0].temp.max)}&deg;
@@ -78,6 +84,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               L: {Math.ceil(weatherData?.daily[0].temp.min)}&deg;
             </p>
           </div>
+          {/* TODO: Make this a reusable component: SUNSET SUNRISE */}
           <div className="flex gap-5 justify-start scrollbar-thin overflow-auto hover:overflow-scroll w-64 mt-3 mx-10 py-2">
             {filteredHourlyData.map((hourData, index) => {
               return (
@@ -103,6 +110,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               );
             })}
           </div>
+          {/* TODO: Make this a reusable component use array.map: WEATHER DETAILS */}
           <div className="grid grid-cols-2 mt-4 gap-y-3 gap-x-2.5">
             <Card>
               <div className="flex flex-col items-center justify-center px-10 py-2">
@@ -175,6 +183,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
               </div>
             </Card>
           </div>
+          {/* TODO: Make this a reusable component: BUTTON */}
           <button
             onClick={handleResetData}
             className="flex items-center bg-blue-500 text-white py-2 px-4 mt-5 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"

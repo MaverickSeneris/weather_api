@@ -10,7 +10,7 @@ export interface Location {
   lat: number;
   lon: number;
   country: string;
-  state?: string;
+  state: string; 
 }
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
     lat: number,
     lon: number,
     name: string,
-    state: string, 
+    state: string
   ) => {
     console.log(lat, lon);
     setName(name);
@@ -70,6 +70,8 @@ function App() {
     <div className="flex h-screen overflow-auto flex-col items-center justify-center bg-blue-500">
       {weatherData ? (
         <WeatherInfo
+          city={city}
+          locations={locations}
           name={name}
           state={state}
           weatherData={weatherData}

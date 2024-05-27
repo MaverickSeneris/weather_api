@@ -6,11 +6,11 @@ import { Location } from "../App";
 interface GeoLocationFormProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   handleCityChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleGeoLocation: ( 
+  handleGeoLocation: (
     lat: number,
     lon: number,
     name: string,
-    state?: string
+    state: string
   ) => void;
   locations: Location[];
   city: string;
@@ -18,6 +18,7 @@ interface GeoLocationFormProps {
   setError: (error: string | null) => void;
 }
 
+// TODO: RENAME THIS TO SEARCH FORM
 const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   handleSubmit,
   handleCityChange,
@@ -29,6 +30,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   return (
     <div className="flex flex-col gap-5 h-screen items-center justify-center">
       <Card>
+        {/* TODO: Make this a reusable component: GEOLOCATIONFORM */}
         <div className="flex flex-col items-center justify-center gap-2 p-10">
           <h1 className="text-5xl font-thin mb-5">
             Weather <span className="font-bold">Wise</span>
@@ -57,6 +59,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
         </div>
         {error && <p className="text-red-500 mt-4">{error}</p>}
       </Card>
+      {/* TODO: Make this a reusable component: LOCATION RESULTS */}
       {locations.length > 0 && (
         <Card>
           <div className="flex flex-col items-start gap-3 w-96 mx-11 my-5">
