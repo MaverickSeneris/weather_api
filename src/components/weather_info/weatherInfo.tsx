@@ -8,6 +8,11 @@ import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { PiGaugeFill } from "react-icons/pi";
 import Card from "../card";
 import { Location } from "../../App";
+import LocationName from "./locationName";
+import CurrentWeather from "./currentWeather";
+import HourlyWeatherInfo from "./hourlyWeatherInfo";
+import convertUnixTimestampToHHMM from "../../lib/utils";
+
 
 interface WeatherInfoProps {
   name: string;
@@ -40,76 +45,16 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
     setLocations([]);
   };
 
-  // NOTE: Encapsulate this and make it as a function:
-  const hourlyData = weatherData?.hourly;
-  const filteredHourlyData = hourlyData.filter(
-    (_, index) => index === 0 || index % 2 !== 0
-  );
 
-  // NOTE: Encapsulate this function:
-  const convertUnixTimestampToHHMM = (
-    timestamp: number,
-    hourMin?: boolean
-  ): string => {
-    const date = new Date(timestamp * 1000);
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    return hourMin ? `${hours}:${minutes}` : `${hours}`;
-  };
+
 
   return (
     <div className="flex flex-col justify-center p-10">
       <Card>
         <div className="flex flex-col items-center gap-2 w-full px-1 py-5">
-          {/* TODO: Make this a reusable component: LOCATION */}
-          <h1 className="text-4xl font-bold">
-            {name}
-            {state && <span className="font-thin">, {state}</span>}
-          </h1>
-          {/* TODO: Make this a reusable component: CURRENT TEMP */}
-          <p className="text-4xl font-black">
-            {Math.ceil(weatherData.current?.temp)}&deg;
-          </p>
-          {/* TODO: Make this a reusable component: CURRENT CONDITION */}
-          <p className="text-xl">
-            {weatherData?.current.weather[0].main} (
-            {weatherData?.current.weather[0].description})
-          </p>
-          {/* TODO: Make this a reusable component: CURRENT TEMP */}
-          <div className="flex gap-5">
-            <p className="text-xl">
-              H: {Math.ceil(weatherData?.daily[0].temp.max)}&deg;
-            </p>
-            <p className="text-xl">
-              L: {Math.ceil(weatherData?.daily[0].temp.min)}&deg;
-            </p>
-          </div>
-          {/* TODO: Make this a reusable component: SUNSET SUNRISE */}
-          <div className="flex gap-5 justify-start scrollbar-thin overflow-auto hover:overflow-scroll w-64 mt-3 mx-10 py-2">
-            {filteredHourlyData.map((hourData, index) => {
-              return (
-                <div
-                  className="flex flex-col gap-1 items-center justify-center "
-                  key={index}
-                >
-                  <p className="text-sm">
-                    {index === 0 ? (
-                      <span className="text-xs font-semibold">Now</span>
-                    ) : (
-                      convertUnixTimestampToHHMM(hourData.dt)
-                    )}
-                  </p>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${hourData.weather[0].icon}@4x.png`}
-                    alt="Weather icon"
-                  />
-                  <p className="text-sm font-bold">
-                    {Math.ceil(hourData.temp)}&deg;
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          <LocationName name={name} state={state}/>
+          <CurrentWeather weatherData={weatherData}/>
+          <HourlyWeatherInfo weatherData={weatherData}/>
           {/* TODO: Make this a reusable component use array.map: WEATHER DETAILS */}
           <div className="grid grid-cols-2 mt-4 gap-y-3 gap-x-2.5">
             <Card>
