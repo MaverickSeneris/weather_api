@@ -7,7 +7,7 @@ import { LuWind } from "react-icons/lu";
 import { FaTemperatureThreeQuarters } from "react-icons/fa6";
 import { PiGaugeFill } from "react-icons/pi";
 import convertUnixTimestampToHHMM from "../../lib/utils";
-import Card from "../card";
+import Card from "../shared/card";
 
 interface WeatherDetailsProps {
   weatherData: WeatherData;

@@ -52,7 +52,8 @@ function App() {
     setName(name);
     setState(state);
     const apiKey = import.meta.env.VITE_APP_KEY;
-    const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    const url = import.meta.env.VITE_URL;
+    const apiUrl = `${url}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
     axios
       .get<WeatherData>(apiUrl)

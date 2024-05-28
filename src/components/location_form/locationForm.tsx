@@ -1,5 +1,5 @@
 import React, { FormEvent, ChangeEvent } from "react";
-import Card from "../card";
+import Card from "../shared/card";
 import { Location } from "../../App";
 import Form from "./form";
 import Header from "../shared/header";

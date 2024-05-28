@@ -1,5 +1,5 @@
 import { WeatherData } from "../../../types";
-import Card from "../card";
+import Card from "../shared/card";
 import { Location } from "../../App";
 import LocationName from "./locationName";
 import CurrentWeather from "./currentWeather";
