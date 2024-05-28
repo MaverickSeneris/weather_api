@@ -53,7 +53,8 @@ function App() {
     setState(state);
     const apiKey = import.meta.env.VITE_APP_KEY;
     const url = import.meta.env.VITE_URL;
-    const apiUrl = `${url}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    const unit = "metric"
+    const apiUrl = `${url}?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
 
     axios
       .get<WeatherData>(apiUrl)
