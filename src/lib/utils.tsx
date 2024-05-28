@@ -9,12 +9,5 @@ const convertUnixTimestampToHHMM = (
   };
 
   export default convertUnixTimestampToHHMM;
-
-// export const filterArray = (hourlyData: []) => {
-//   const filteredHourlyData = hourlyData.filter(
-//     (_, index) => index === 0 || index % 2 !== 0
-//   );
-//   return filteredHourlyData
-// }
   
 
