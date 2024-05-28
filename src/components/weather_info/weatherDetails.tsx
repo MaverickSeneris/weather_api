@@ -15,16 +15,17 @@ interface WeatherDetailsProps {
 
 const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weatherData }) => {
   const iconSize = 13
+  const sunIconSize = 20
   const weatherDetails = [
     {
       isSunData: true,
       data: convertUnixTimestampToHHMM(weatherData.current.sunrise, true),
-      icon: <BsFillSunriseFill size={25} />,
+      icon: <BsFillSunriseFill size={sunIconSize} />,
     },
     {
       isSunData: true,
       data: convertUnixTimestampToHHMM(weatherData.current.sunset, true),
-      icon: <BsFillSunsetFill size={25} />,
+      icon: <BsFillSunsetFill size={sunIconSize} />,
     },
     {
       name: "Wind",
