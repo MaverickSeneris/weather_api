@@ -29,7 +29,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
   error,
 }) => {
   return (
-    <div className="flex flex-col gap-5 h-screen items-center justify-center">
+    <div>
       <Card>
         <Header />
         <Form

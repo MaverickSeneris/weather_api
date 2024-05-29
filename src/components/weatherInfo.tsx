@@ -40,7 +40,6 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-center p-10">
       <Card>
         <div className="flex flex-col items-center gap-2 w-full px-1 py-5">
           <LocationName name={name} state={state}/>
@@ -50,7 +49,6 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
           <Button handleResetData={handleResetData}/>
         </div>
       </Card>
-    </div>
   );
 };
 
