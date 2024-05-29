@@ -1,9 +1,9 @@
 import React, { FormEvent, ChangeEvent } from "react";
-import Card from "../shared/card";
-import { Location } from "../../App";
-import Form from "./form";
-import Header from "../shared/header";
-import LocationResults from "./locationResults";
+import Card from "../components/shared/card";
+import { Location } from "../App";
+import Form from "../components/location_form/form";
+import Header from "../components/shared/header";
+import LocationResults from "../components/location_form/locationResults";
 
 interface GeoLocationFormProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;

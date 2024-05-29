@@ -1,11 +1,11 @@
-import { WeatherData } from "../../../types";
-import Card from "../shared/card";
-import { Location } from "../../App";
-import LocationName from "./locationName";
-import CurrentWeather from "./currentWeather";
-import HourlyWeatherInfo from "./hourlyWeatherInfo";
-import Button from "../shared/button";
-import WeatherDetails from "./weatherDetails";
+import { WeatherData } from "../../types";
+import Card from "./shared/card";
+import { Location } from "../App";
+import LocationName from "../components/weather_info/locationName";
+import CurrentWeather from "../components/weather_info/currentWeather";
+import HourlyWeatherInfo from "../components/weather_info/hourlyWeatherInfo";
+import Button from "../components/shared/button";
+import WeatherDetails from "../components/weather_info/weatherDetails";
 
 interface WeatherInfoProps {
   name: string;
