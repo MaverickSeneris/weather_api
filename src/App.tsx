@@ -32,9 +32,9 @@ function App() {
         setLocations(response.data);
         setError(null);
       })
-      .catch((error) => {
+      .catch((error: []) => {
         console.error("Error fetching data from the API:", error);
-        setError("Error fetching data from the API");
+        setError(`Error fetching data from the API: ${error}`);
       });
   };
 

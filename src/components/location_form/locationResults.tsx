@@ -15,12 +15,12 @@ const LocationResults: React.FC<LocationProps> = ({
   locations,
 }) => {
   return (
-    <div className="flex flex-col items-start gap-2 w-96 mx-7 my-5">
+    <div className="flex flex-col items-start w-96 m-5">
       {locations.map((location, index) => {
         return (
           <div
             key={index}
-            className="flex gap-1 items-start justify-start  cursor-pointer hover:text-blue-600 text-3xl active:text-blue-700 ..."
+            className="flex py-1 gap-1 items-start justify-start  cursor-pointer hover:text-blue-600 text-3xl active:text-blue-700 ..."
             onClick={() =>
               handleGeoLocation(
                 location.lat,

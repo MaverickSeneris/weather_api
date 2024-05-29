@@ -37,7 +37,7 @@ const GeoLocationForm: React.FC<GeoLocationFormProps> = ({
           handleSubmit={handleSubmit}
           city={city}
         />
-        {error && <p className="text-red-500 mt-4">{error}</p>}
+        {error && <p className="text-red-500 mt-4 items-center justify-center">{error}</p>}
       </Card>
       {locations.length > 0 && (
         <Card>
