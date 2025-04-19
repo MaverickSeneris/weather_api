@@ -69,7 +69,7 @@ const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weatherData }) => {
     <div className="grid grid-cols-2 mt-4 gap-y-3 gap-x-2.5">
       {weatherDetails.map((data, index) => {
         return (
-          <Card>
+          <Card key={index}>
             {data.isSunData ? (
               <div className="flex flex-col items-center justify-center px-10 py-2">
                 {data.icon}

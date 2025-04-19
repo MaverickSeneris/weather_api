@@ -1,36 +1,43 @@
+// Importing necessary React hooks and types
 import { useState, FormEvent, ChangeEvent } from "react";
-import axios from "axios";
-import "./App.css";
-import GeoLocationForm from "./components/locationForm";
-import WeatherInfo from "./components/weatherInfo";
-import { WeatherData } from "../types";
+import axios from "axios"; // For making API calls
+import "./App.css"; // Styling
+import GeoLocationForm from "./components/locationForm"; // Form to input city
+import WeatherInfo from "./components/weatherInfo"; // Component to show weather
+import { WeatherData } from "../types"; // Type definition for weather data
 
+// Custom type for location data from the geolocation API
 export interface Location {
   name: string;
   lat: number;
   lon: number;
   country: string;
-  state: string; 
+  state: string;
 }
 
 function App() {
-  const [city, setCity] = useState<string>("");
-  const [locations, setLocations] = useState<Location[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [name, setName] = useState<string>("");
-  const [state, setState] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  // State to track user input and results
+  const [city, setCity] = useState<string>(""); // User's input city
+  const [locations, setLocations] = useState<Location[]>([]); // List of matched locations
+  const [error, setError] = useState<string | null>(null); // Error messages
+  const [name, setName] = useState<string>(""); // Selected location's name
+  const [state, setState] = useState<string>(""); // Selected location's state
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null); // Weather info
 
+  // Form submission handler to fetch possible locations based on city name
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+
+    const geoLocationUrl = import.meta.env.VITE_GEOLOCATION_URL
+    e.preventDefault(); // Prevent form from refreshing the page
     const apiKey = import.meta.env.VITE_APP_KEY;
-    const apiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`;
+    const apiUrl = `${geoLocationUrl}q=${city}&limit=5&appid=${apiKey}`;
 
     axios
       .get<Location[]>(apiUrl)
       .then((response) => {
-        setLocations(response.data);
-        setError(null);
+        setLocations(response.data); // Save locations
+        setError(null); // Clear any previous error
       })
       .catch((error: []) => {
         console.error("Error fetching data from the API:", error);
@@ -38,10 +45,12 @@ function App() {
       });
   };
 
+  // Tracks input changes for city field
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCity(e.target.value);
+    setCity(e.target.value); // Update city as user types
   };
 
+  // Called when user picks a specific location
   const handleGeoLocation = (
     lat: number,
     lon: number,
@@ -53,14 +62,14 @@ function App() {
     setState(state);
     const apiKey = import.meta.env.VITE_APP_KEY;
     const url = import.meta.env.VITE_URL;
-    const unit = "metric"
-    const apiUrl = `${url}?lat=${lat}&lon=${lon}&units=${unit}&appid=${apiKey}`;
+    const unit = "metric";
+    const apiUrl = `${url}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${unit}`;
 
     axios
       .get<WeatherData>(apiUrl)
       .then((response) => {
-        setWeatherData(response.data);
-        setError(null);
+        setWeatherData(response.data); // Save weather info
+        setError(null); // Clear error if successful
       })
       .catch((error) => {
         console.error("Error fetching data from the API:", error);
@@ -68,6 +77,7 @@ function App() {
       });
   };
 
+  // Renders either the weather info or the city input form depending on whether we have weather data
   return (
     <div className="flex h-screen overflow-auto flex-col items-center justify-center bg-blue-500">
       {weatherData ? (
